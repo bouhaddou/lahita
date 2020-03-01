@@ -1,0 +1,38 @@
+ {% extends "admin/base.html.twig" %} 
+
+ {% block body %}
+<div class="wrapper">
+
+  <!-- Navbar -->
+ 
+   {% include "admin/partials/navbar.html.twig" %}
+  <!-- /.navbar -->
+  {% include "admin/partials/asidebar.html.twig" %}
+ 
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+      <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark"> Produits</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+              <li class="breadcrumb-item "><a href="#">Table de bord</a></li>
+              <li class="breadcrumb-item active">Produits</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+  <div class="container">
+
+    {{ include('admin/produits/_form.html.twig') }}
+
+    {# <a href="{{ path('produits_index') }}">back to list</a> #}
+</div>
+</div>
+</div>
+{% endblock %}

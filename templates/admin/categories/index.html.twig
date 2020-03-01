@@ -1,0 +1,106 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Categories index{% endblock %}
+
+{% block body %}
+<div class="wrapper">
+
+  <!-- Navbar -->
+ 
+   {% include "admin/partials/navbar.html.twig" %}
+  <!-- /.navbar -->
+  {% include "admin/partials/asidebar.html.twig" %}
+ 
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark"> Catégories</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+              <li class="breadcrumb-item "><a href="#">Table de bord</a></li>
+              <li class="breadcrumb-item active">Catégories</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <h1 class="text-center">Gestion des Catégories</h1>
+
+   
+    <section class="content">
+      <div class="container-fluid">
+        <!-- /.row -->
+        <!-- /.row -->
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Liste des Categories</h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 170px;">
+                    <div class="input-group-append">
+                      <a type="button" href="{{ path('categories_new') }}" class="btn btn-success "><i class="fas fa-plus"></i> Ajouter une Catégorie</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0" style="height: 300px;">
+                <table class="table table-head-fixed text-nowrap">
+                  <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Libelle</th>
+                        <th>Observation</th>
+                        <th class="text-center">Produits</th>
+                        <th>Date</th>
+                        <th class="text-center">actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                   {% for category in categories %}
+                    <tr>
+                        <td>{{ category.id }}</td>
+                        <td>{{ category.libelle }}</td>
+                        <td>
+                        {% if category.observation|length > 20  %}
+                        {{ category.observation|slice(0,20) }} ...
+                        {% else %}
+                        {{ category.observation }} 
+                        {% endif %}
+                        </td>
+                        <td class=" text-center"><span class="badge badge-primary">{{ category.produits| length }}</span></td>
+                        <td>{{ category.date ? category.date|date('Y-m-d H:i:s') : '' }}</td>
+                        <td class="text-center">
+                            <a class="btn text-primary" href="{{ path('categories_show', {'id': category.id}) }}"><i class="fas fa-eye"></i></a>
+                            <a class="btn text-success" href="{{ path('categories_edit', {'id': category.id}) }}"><i class="fas fa-edit"></i></a>
+                            <a class="btn text-danger {% if category.produits| length != 0 %} disabled {% endif %}" href="{{ path('categories_deleteBy', {'id': category.id}) }}"><i class="fas fa-trash"></i></a>
+                            <a class="btn text-info" href="{{ path('produits_index', {'id': category.id }) }}"><i class="fas fa-list"></i> </a>
+                        </td>
+                    </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+</div>
+</div>
+{% endblock %}

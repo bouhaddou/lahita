@@ -1,0 +1,52 @@
+ {% extends "admin/base.html.twig" %} 
+
+ {% block body %}
+<div class="wrapper">
+
+  <!-- Navbar -->
+ 
+   {% include "admin/partials/navbar.html.twig" %}
+  <!-- /.navbar -->
+  {% include "admin/partials/asidebar.html.twig" %}
+ 
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+  <div class="container">
+    <h1 class="text-center">Categories</h1>
+
+    <table class="table table-hover">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ category.id }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ category.libelle }}</td>
+            </tr>
+            <tr>
+                <th>Observation</th>
+                <td>{{ category.observation }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ category.date ? category.date|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div class="col offset-md-4">
+             <a class="btn btn-success mb-1"  href="{{ path('categories_edit', {'id': category.id}) }}"><i class="fas fa-edit"></i> Modifier</a>
+        </div>
+        <div class="col">
+             <a class="btn btn-primary mb-1" href="{{ path('categories_index') }}"><i class="fas fa-undo"></i> Annuler</a>
+        </div>
+        <div class="col">
+            {{ include('admin/categories/_delete_form.html.twig') }}
+        </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}
